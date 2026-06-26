@@ -20,11 +20,11 @@ A production-ready File Processing Service built with Node.js, TypeScript, Expre
 
 This project implements all requirements from the technical assessment:
 
-| Category | Covered |
-| -------- | ------- |
-| **Core stack** | Node.js, TypeScript, Express, Redis, BullMQ |
-| **Functional** | Create job, async processing (5–10s), 20% failure simulation, 3 retries with exponential backoff, job status, queue stats, structured logging |
-| **Bonus** | JWT auth, rate limiting, Zod validation, unit + integration tests, GitHub Actions CI, Swagger, Bull Board, Winston logging, env config, Docker, AWS S3 pre-signed URLs |
+| Category       | Covered                                                                                                                                                                |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Core stack** | Node.js, TypeScript, Express, Redis, BullMQ                                                                                                                            |
+| **Functional** | Create job, async processing (5–10s), 20% failure simulation, 3 retries with exponential backoff, job status, queue stats, structured logging                          |
+| **Bonus**      | JWT auth, rate limiting, Zod validation, unit + integration tests, GitHub Actions CI, Swagger, Bull Board, Winston logging, env config, Docker, AWS S3 pre-signed URLs |
 
 > **Note:** All API routes are versioned under `/api/v1` (e.g. `POST /api/v1/jobs` instead of `POST /jobs`). Swagger UI and the tables below use the versioned paths.
 
@@ -81,23 +81,23 @@ cp .env.example .env
 
 ## Environment Variables
 
-| Variable                 | Required | Default                                      | Description                                      |
-| ------------------------ | -------- | -------------------------------------------- | ------------------------------------------------ |
-| `PORT`                   | No       | `3000`                                       | HTTP server port                                 |
-| `NODE_ENV`               | No       | `development`                                | `development`, `production`, `test`              |
-| `REDIS_URL`              | No       | `redis://localhost:6379`                     | Redis connection URL                             |
-| `JWT_SECRET`             | **Yes**  | —                                            | JWT signing secret (min 16 chars)                |
-| `JWT_REFRESH_SECRET`     | **Yes**  | —                                            | Refresh token signing secret                     |
-| `JWT_EXPIRES_IN`         | No       | `15m`                                        | Access token TTL                                 |
-| `JWT_REFRESH_EXPIRES_IN` | No       | `7d`                                         | Refresh token TTL                                |
-| `AWS_REGION`             | No       | `us-east-1`                                  | AWS region for S3                                |
-| `AWS_ACCESS_KEY_ID`      | No       | —                                            | AWS credentials (uses IAM role if omitted)       |
-| `AWS_SECRET_ACCESS_KEY`  | No       | —                                            | AWS credentials                                  |
-| `AWS_S3_BUCKET`          | No       | —                                            | S3 bucket name (required for `/upload-url`)      |
-| `QUEUE_NAME`             | No       | `file-processing`                            | BullMQ queue name                                |
-| `QUEUE_CONCURRENCY`      | No       | `5`                                          | Number of concurrent worker threads              |
+| Variable                 | Required | Default                                       | Description                                      |
+| ------------------------ | -------- | --------------------------------------------- | ------------------------------------------------ |
+| `PORT`                   | No       | `3000`                                        | HTTP server port                                 |
+| `NODE_ENV`               | No       | `development`                                 | `development`, `production`, `test`              |
+| `REDIS_URL`              | No       | `redis://localhost:6379`                      | Redis connection URL                             |
+| `JWT_SECRET`             | **Yes**  | —                                             | JWT signing secret (min 16 chars)                |
+| `JWT_REFRESH_SECRET`     | **Yes**  | —                                             | Refresh token signing secret                     |
+| `JWT_EXPIRES_IN`         | No       | `15m`                                         | Access token TTL                                 |
+| `JWT_REFRESH_EXPIRES_IN` | No       | `7d`                                          | Refresh token TTL                                |
+| `AWS_REGION`             | No       | `us-east-1`                                   | AWS region for S3                                |
+| `AWS_ACCESS_KEY_ID`      | No       | —                                             | AWS credentials (uses IAM role if omitted)       |
+| `AWS_SECRET_ACCESS_KEY`  | No       | —                                             | AWS credentials                                  |
+| `AWS_S3_BUCKET`          | No       | —                                             | S3 bucket name (required for `/upload-url`)      |
+| `QUEUE_NAME`             | No       | `file-processing`                             | BullMQ queue name                                |
+| `QUEUE_CONCURRENCY`      | No       | `5`                                           | Number of concurrent worker threads              |
 | `CORS_ORIGIN`            | No       | `http://localhost:3000,http://localhost:5173` | Comma-separated allowed origins; use `*` for all |
-| `CORS_CREDENTIALS`       | No       | `true`                                       | Allow cookies / Authorization headers from CORS  |
+| `CORS_CREDENTIALS`       | No       | `true`                                        | Allow cookies / Authorization headers from CORS  |
 
 ## Running Locally
 
@@ -153,27 +153,27 @@ Base URL: `http://localhost:3000`
 
 ### Authentication
 
-| Method | Path                    | Auth | Rate Limit       | Description              |
-| ------ | ----------------------- | ---- | ---------------- | ------------------------ |
-| POST   | `/api/v1/auth/register` | No   | 10 / 15 min      | Register new user        |
-| POST   | `/api/v1/auth/login`    | No   | 10 / 15 min      | Login, receive tokens    |
-| POST   | `/api/v1/auth/refresh`  | No   | —                | Refresh access token     |
-| POST   | `/api/v1/auth/logout`   | Yes  | —                | Invalidate refresh token |
-| GET    | `/api/v1/auth/me`       | Yes  | —                | Get current user         |
+| Method | Path                    | Auth | Rate Limit  | Description              |
+| ------ | ----------------------- | ---- | ----------- | ------------------------ |
+| POST   | `/api/v1/auth/register` | No   | 10 / 15 min | Register new user        |
+| POST   | `/api/v1/auth/login`    | No   | 10 / 15 min | Login, receive tokens    |
+| POST   | `/api/v1/auth/refresh`  | No   | —           | Refresh access token     |
+| POST   | `/api/v1/auth/logout`   | Yes  | —           | Invalidate refresh token |
+| GET    | `/api/v1/auth/me`       | Yes  | —           | Get current user         |
 
 ### Jobs
 
-| Method | Path               | Auth | Rate Limit  | Description            |
-| ------ | ------------------ | ---- | ----------- | ---------------------- |
-| POST   | `/api/v1/jobs`     | Yes  | 60 / min    | Create and queue a job |
-| GET    | `/api/v1/jobs/:id` | Yes  | 60 / min    | Get job status         |
+| Method | Path               | Auth | Rate Limit | Description            |
+| ------ | ------------------ | ---- | ---------- | ---------------------- |
+| POST   | `/api/v1/jobs`     | Yes  | 60 / min   | Create and queue a job |
+| GET    | `/api/v1/jobs/:id` | Yes  | 60 / min   | Get job status         |
 
 ### Stats & Upload
 
-| Method | Path                 | Auth | Rate Limit  | Description                |
-| ------ | -------------------- | ---- | ----------- | -------------------------- |
-| GET    | `/api/v1/stats`      | Yes  | 60 / min    | Queue statistics           |
-| POST   | `/api/v1/upload-url` | Yes  | 10 / min    | Generate S3 pre-signed URL |
+| Method | Path                 | Auth | Rate Limit | Description                |
+| ------ | -------------------- | ---- | ---------- | -------------------------- |
+| GET    | `/api/v1/stats`      | Yes  | 60 / min   | Queue statistics           |
+| POST   | `/api/v1/upload-url` | Yes  | 10 / min   | Generate S3 pre-signed URL |
 
 ### Monitoring & Docs
 
@@ -282,7 +282,7 @@ Versioning keeps the API stable as endpoints evolve. All assignment endpoints ar
 
 Commits are structured by feature:
 
-1. `chore: initialize project structure`
+1. `initial commit`
 2. `feat: add config layer with Zod env validation`
 3. `feat: add core infrastructure (Redis, logger, errors)`
 4. `feat: implement auth module with JWT`
