@@ -75,11 +75,9 @@ tests/
 git clone <repo-url>
 cd kgtech-assignment
 npm install
-cp .env.example .env
-# Edit .env with your values (JWT secrets are required)
 ```
 
-## Environment Variables
+## Environment Variables (You don't need to configure the env as i have added env file to the project for you to run and check the assignment functionality)
 
 | Variable                 | Required | Default                                       | Description                                      |
 | ------------------------ | -------- | --------------------------------------------- | ------------------------------------------------ |
