@@ -10,7 +10,7 @@ import { config } from "./config/index.js";
 import { logger } from "./core/logger/logger.js";
 
 /**
- * Initializes infrastructure dependencies and starts the HTTP server.
+ * Initializes infrastructure dependencies and starts the HTTP server....
  */
 async function bootstrap(): Promise<void> {
   const redis = getRedisClient();
